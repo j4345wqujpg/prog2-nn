@@ -62,16 +62,18 @@ for epoch in range(n_epochs):
     print(f'    training loss: {train_loss}({time_end - time_start:.3f}s)')
     train_loss_log.append(train_loss)
 
+    time_start = time.time()
     val_loss = models.test(model, dataloader_test, loss_fn)
-    print(f'    validation loss: {val_loss}')
+    print(f'    validation loss: {val_loss}({time_end - time_start:.3f}s)')
     val_loss_log.append(val_loss)
 
+    time_start = time.time()
     train_acc = models.test_accuracy(model, dataloader_train)
-    print(f'    training accuracy: {train_acc*100:.3f}%')
+    print(f'    training accuracy: {train_acc*100:.3f}%({time_end - time_start:.3f}s)')
     train_acc_log.append(train_acc)
 
     val_acc = models.test_accuracy(model, dataloader_train)
-    print(f'    validation accuracy: {val_acc*100:.3f}%')
+    print(f'    validation accuracy: {val_acc*100:.3f}%({time_end - time_start:.3f}s)')
     val_acc_log.append(val_acc)
 
 plt.subplot(1, 2, 1)
