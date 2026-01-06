@@ -41,8 +41,13 @@ def test_accuracy(model, dataloader):
 
 def train(model, dataloader, loss_fn, optimizer):
     model.train()
+    device = next(model.parameters()).device
+
     for image_batch, label_batch in dataloader:
         logits_batch = model(image_batch)
+
+        image_batch = image_batch.to(device)
+        label_batch = label_batch.to(device)
 
         loss = loss_fn(logits_batch, label_batch)
 
@@ -56,10 +61,15 @@ def test(model, dataloader, loss_fn):
 
     loss_total = 0.0
 
+    device = next(model.parameters()).device
+
     model.eval()
     with torch.no_grad():
         for image_batch, label_batch in dataloader:
             logits_batch = model(image_batch)
+
+            image_batch = image_batch.to(device)
+            label_batch = label_batch.to(device)
 
             loss = loss_fn(logits_batch, label_batch)
             loss_total += loss.item()
