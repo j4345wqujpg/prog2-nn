@@ -55,7 +55,6 @@ def train(model, dataloader, loss_fn, optimizer):
 def test(model, dataloader, loss_fn):
 
     loss_total = 0.0
-
     device = next(model.parameters()).device
 
     model.eval()
