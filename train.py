@@ -37,8 +37,11 @@ dataloader_test = torch.utils.data.DataLoader(
     batch_size = batch_size
 )
 
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 model = models.MyModel()
+model.to(device)
+
 loss_fn = torch.nn.CrossEntropyLoss()
 
 learning_rate = 1e-3
